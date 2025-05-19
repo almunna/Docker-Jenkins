@@ -25,10 +25,10 @@ services:
       ME_CONFIG_MONGODB_SERVER: mongo
       ME_CONFIG_BASICAUTH_USERNAME: admin
       ME_CONFIG_BASICAUTH_PASSWORD: admin123
-    networks:
-      - app-network
     depends_on:
       - mongo
+    networks:
+      - app-network
 
   nodeapp:
     build: .
@@ -43,7 +43,24 @@ services:
       - app-network
     volumes:
       - .:/app
+    working_dir: /app
+
+  jenkins:
+    image: jenkins/jenkins:lts
+    container_name: jenkins
+    restart: always
+    ports:
+      - "8080:8080"      # Jenkins UI
+      - "50000:50000"    # Jenkins agents
+    volumes:
+      - jenkins_home:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock  # Allow Jenkins to run Docker commands
+    networks:
+      - app-network
 
 networks:
   app-network:
     driver: bridge
+
+volumes:
+  jenkins_home:

@@ -1,0 +1,49 @@
+pipeline {
+    agent any
+
+    environment {
+        COMPOSE_PROJECT_NAME = "myapp"
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                git url: 'https://github.com/almunna/Docker-Jenkins.git', branch: 'master'
+            }
+        }
+
+        stage('Install Dependencies') {
+            steps {
+                sh 'docker-compose run --rm nodeapp npm install'
+            }
+        }
+
+        stage('Build App') {
+            steps {
+                sh 'docker-compose build nodeapp'
+            }
+        }
+
+        stage('Run Tests') {
+            steps {
+                sh 'docker-compose run --rm nodeapp npm test'
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                sh 'docker-compose down'
+                sh 'docker-compose up -d --build'
+            }
+        }
+    }
+
+    post {
+        always {
+            echo 'Pipeline completed.'
+        }
+        failure {
+            echo 'Pipeline failed.'
+        }
+    }
+}
