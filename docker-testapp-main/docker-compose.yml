@@ -46,15 +46,17 @@ services:
     working_dir: /app
 
   jenkins:
-    image: jenkins/jenkins:lts
+    build:
+      context: .
+      dockerfile: Dockerfile.jenkins
     container_name: jenkins
     restart: always
     ports:
-      - "8080:8080"      # Jenkins UI
-      - "50000:50000"    # Jenkins agents
+      - "8080:8080"
+      - "50000:50000"
     volumes:
       - jenkins_home:/var/jenkins_home
-      - /var/run/docker.sock:/var/run/docker.sock  # Allow Jenkins to run Docker commands
+      - /var/run/docker.sock:/var/run/docker.sock
     networks:
       - app-network
 
