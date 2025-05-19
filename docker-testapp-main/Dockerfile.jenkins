@@ -2,10 +2,10 @@ FROM jenkins/jenkins:lts
 
 USER root
 
-# Install Docker CLI + Compose
+# Install docker + docker-compose
 RUN apt-get update && \
     apt-get install -y docker.io docker-compose && \
+    groupadd -f docker && \
     usermod -aG docker jenkins
 
-# Switch back to Jenkins user
 USER jenkins
