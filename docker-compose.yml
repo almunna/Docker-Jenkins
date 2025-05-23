@@ -1,8 +1,6 @@
-version: '3.8'
-
 services:
   backend:
-    build: ./backend
+    build: ./Backend
     ports:
       - "8000:8000"
     environment:
@@ -11,11 +9,11 @@ services:
       - mongo
 
   frontend:
-    build: ./frontend
+    build: ./Frontend
     ports:
       - "3000:80"
     depends_on:
-      - backend
+      - backend  # ✅ fixed lowercase
 
   mongo:
     image: mongo:6

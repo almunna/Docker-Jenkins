@@ -72,7 +72,7 @@ function App() {
             className="ml-2 text-blue-600 hover:underline"
             onClick={() => setMode(mode === "login" ? "register" : "login")}
           >
-            {mode === "login" ? "Register" : "Login"}
+            {mode === "login" ? "Register" : "hjdsh"}
           </button>
         </p>
       </div>
