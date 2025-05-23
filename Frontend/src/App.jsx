@@ -34,7 +34,7 @@ function App() {
             <input
               type="text"
               name="name"
-              placeholder="Name"
+              placeholder="Nme"
               value={form.name}
               onChange={handleChange}
               className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-400"
@@ -63,16 +63,16 @@ function App() {
             type="submit"
             className="w-full bg-gradient-to-r from-purple-500 to-pink-500 text-white py-2 rounded-md hover:from-purple-600 hover:to-pink-600"
           >
-            {mode === "login" ? "Login" : "Register"}
+            {mode === "login" ? "Hello" : "Register"}
           </button>
         </form>
         <p className="mt-4 text-center text-sm text-gray-600">
-          {mode === "login" ? "Don't have an account?" : "Already have an account?"}
+          {mode === "Hello" ? "Don't have an account?" : "Already have an account?"}
           <button
             className="ml-2 text-blue-600 hover:underline"
-            onClick={() => setMode(mode === "login" ? "register" : "login")}
+            onClick={() => setMode(mode === "Hello" ? "register" : "Hello")}
           >
-            {mode === "login" ? "Register" : "hjdsh"}
+            {mode === "Hello" ? "Register" : "hjdsh"}
           </button>
         </p>
       </div>
